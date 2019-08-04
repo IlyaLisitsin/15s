@@ -16,6 +16,41 @@ while (counter < 16) {
 
 mainArr[currentLine].push(null);
 
+document.querySelector('body').addEventListener('keydown', e => {
+    const iNull = mainArr.indexOf(mainArr.find(arr => arr.includes(null)));
+    const jNull = mainArr.find(arr => arr.includes(null)).indexOf(null);
+
+    switch (e.keyCode) {
+        // left
+        case 37:
+            if (mainArr[iNull][jNull + 1]) {
+                mainArr[iNull][jNull] = mainArr[iNull][jNull + 1];
+                mainArr[iNull][jNull + 1] = null;
+            }
+            break;
+        // up
+        case 38:
+            if (mainArr[iNull + 1]) {
+                mainArr[iNull][jNull] = mainArr[iNull + 1][jNull];
+                mainArr[iNull + 1][jNull] = null;
+            }
+            break;
+        // right
+        case 39:
+            if (mainArr[iNull][jNull - 1]) {
+                mainArr[iNull][jNull] = mainArr[iNull][jNull - 1];
+                mainArr[iNull][jNull - 1] = null;
+            }
+            break;
+        // down
+        case 40:
+            if (mainArr[iNull - 1]) {
+                mainArr[iNull][jNull] = mainArr[iNull - 1][jNull];
+                mainArr[iNull - 1][jNull] = null;
+            }
+    }
+});
+
 function loop() {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0,0,400,400);
